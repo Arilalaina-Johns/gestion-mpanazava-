@@ -1,0 +1,18 @@
+{
+  "name": "Gestion Mpanazava",
+  "short_name": "Mpanazava",
+  "description": "Gestion locale des branches Mpanazava",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f2f6f2",
+  "theme_color": "#123d2c",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

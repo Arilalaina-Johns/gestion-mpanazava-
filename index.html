@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#123d2c">
+  <meta name="description" content="Application locale de gestion Mpanazava">
+  <title>Gestion Mpanazava</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#" aria-label="Accueil">
+    <span class="brand-mark">✦</span>
+    <span><b>GESTION MPANAZAVA</b><small>Fitaizana · Firahalahiana · Fanompoana</small></span>
+  </a>
+  <span class="local-tag"><i></i> Hors ligne</span>
+</header>
+
+<main class="shell">
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="kicker">FITANTANANA NY SAMPANA</p>
+      <h1>Salama, Mpanazava !</h1>
+      <p>Un espace simple pour organiser les membres et les activités.</p>
+    </div>
+    <div class="hero-star" aria-hidden="true">✦</div>
+  </section>
+
+  <section class="stats" aria-label="Statistiques">
+    <article class="stat"><span>Total membres</span><strong id="statTotal">0</strong></article>
+    <article class="stat"><span>Beazina</span><strong id="statBeazina">0</strong></article>
+    <article class="stat"><span>Mpiandraikitra</span><strong id="statLeaders">0</strong></article>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><div><p class="kicker">ORGANISATION</p><h2>Les trois branches</h2></div></div>
+    <div class="branch-grid">
+      <button class="branch-card mavo selected" data-branch="Mavo"><span class="dot"></span><b>Mavo</b><small id="countMavo">0 membre</small></button>
+      <button class="branch-card maitso" data-branch="Maitso"><span class="dot"></span><b>Maitso</b><small id="countMaitso">0 membre</small></button>
+      <button class="branch-card mena" data-branch="Mena"><span class="dot"></span><b>Mena</b><small id="countMena">0 membre</small></button>
+    </div>
+  </section>
+
+  <section class="section panel">
+    <div class="section-head">
+      <div><p class="kicker">BRANCHE SÉLECTIONNÉE</p><h2 id="branchHeading">Branche Mavo</h2></div>
+      <button class="button primary" id="newMember">＋ Ajouter</button>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-kind="Beazina" role="tab">Beazina</button>
+      <button class="tab" data-kind="Mpiandraikitra" role="tab">Mpiandraikitra</button>
+    </div>
+    <label class="search-wrap"><span>⌕</span><input id="search" type="search" placeholder="Rechercher un membre..."></label>
+    <div id="memberList" class="member-list"></div>
+  </section>
+
+  <section class="section panel">
+    <div class="section-head">
+      <div><p class="kicker">PROGRAMME</p><h2>Activités</h2></div>
+      <button class="button secondary" id="newActivity">＋ Activité</button>
+    </div>
+    <div id="activityList" class="activity-list"></div>
+  </section>
+
+  <section class="section panel backup-panel">
+    <div><p class="kicker">DONNÉES</p><h2>Sauvegarde</h2><p class="muted">Les données restent sur cet appareil. Exporte régulièrement une copie.</p></div>
+    <div class="backup-actions">
+      <button class="button secondary" id="exportData">Exporter les données</button>
+      <label class="button secondary file-button">Importer une sauvegarde<input id="importData" type="file" accept="application/json,.json"></label>
+    </div>
+  </section>
+  <p class="privacy-note">Conseil : évite d'enregistrer des informations personnelles sensibles. Protège les sauvegardes exportées.</p>
+</main>
+
+<footer>Gestion Mpanazava <span>© 2026</span></footer>
+
+<dialog id="memberDialog">
+  <form id="memberForm" class="dialog-form">
+    <div class="dialog-head"><div><p class="kicker">FICHE MEMBRE</p><h2 id="memberDialogTitle">Ajouter un membre</h2></div><button type="button" class="close" data-close="memberDialog" aria-label="Fermer">×</button></div>
+    <input type="hidden" id="memberId">
+    <div class="form-grid">
+      <label>Nom<input id="lastName" maxlength="80" required></label>
+      <label>Prénom<input id="firstName" maxlength="80" required></label>
+      <label>Date de naissance<input id="birthDate" type="date"></label>
+      <label>Nom des parents<input id="parents" maxlength="120"></label>
+      <label>Dingana<input id="dingana" maxlength="80"></label>
+      <label>Talenta<input id="talenta" maxlength="120"></label>
+      <label>Fanekena<input id="fanekena" maxlength="120"></label>
+      <label>Téléphone<input id="phone" type="tel" maxlength="30"></label>
+      <label class="wide">Fanamarihana<textarea id="notes" rows="3" maxlength="500"></textarea></label>
+    </div>
+    <div class="dialog-actions"><button type="button" class="button secondary" data-close="memberDialog">Annuler</button><button class="button primary" type="submit">Enregistrer</button></div>
+  </form>
+</dialog>
+
+<dialog id="activityDialog">
+  <form id="activityForm" class="dialog-form">
+    <div class="dialog-head"><div><p class="kicker">PROGRAMME</p><h2>Ajouter une activité</h2></div><button type="button" class="close" data-close="activityDialog" aria-label="Fermer">×</button></div>
+    <label>Nom de l'activité<input id="activityName" maxlength="100" required></label>
+    <div class="form-grid">
+      <label>Branche<select id="activityBranch"><option>Mavo</option><option>Maitso</option><option>Mena</option><option value="Toutes">Toutes les branches</option></select></label>
+      <label>Date<input id="activityDate" type="date" required></label>
+      <label>Lieu<input id="activityPlace" maxlength="120"></label>
+      <label class="wide">Description<textarea id="activityDescription" rows="3" maxlength="500"></textarea></label>
+    </div>
+    <div class="dialog-actions"><button type="button" class="button secondary" data-close="activityDialog">Annuler</button><button class="button primary" type="submit">Enregistrer</button></div>
+  </form>
+</dialog>
+<script src="app.js"></script>
+</body>
+</html>
